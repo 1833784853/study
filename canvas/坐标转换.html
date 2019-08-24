@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>title</title>
+	<style>
+	canvas {
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+	<canvas width="400" height="200"></canvas>
+	<script>
+		window.onload = function () {
+			// 获取该对象
+			var myCanvas = document.querySelector('canvas')
+			// 拿到上下文（工具箱）
+			var ctx = myCanvas.getContext('2d')
+			// 以下所有API 有是作用于坐标轴
+			// 
+			// 移动坐标轴到100，100的位置
+			// ctx.translate(100,100)
+			//
+			// 缩放坐标轴 x方向缩放一半，y方向不变
+			// ctx.scale(0.5,1)
+			// 
+			// 旋转坐标轴，顺时针旋转 1 angle
+			//ctx.rotate(Math.PI / 180)
+		}
+	</script>
+</body>
+</html>

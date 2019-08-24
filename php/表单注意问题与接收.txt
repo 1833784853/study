@@ -1,0 +1,29 @@
+表单处理三部曲：
+1. 接收并效验
+2. 持久化（将数据持久保存到磁盘）
+3. 响应（服务端的反馈）
+
+必须有form标签
+form必须指定action（数据储存到哪里） 和method（数据传输的方式），不设置 action 默认是当前页面（必须设置，因为兼容），不设置method 默认为 get。
+表单元素（表单域）必须有 name （如果希望被提交的情况）
+
+通过在form 上添加 novalidate 取消浏览器自带的效验功能，autocomplete="off" 关掉客户端的自动完成功能
+表单中必须有一个提交按钮
+表单中input的自动完成可以在form标签中加上 autocomplete = "off" 属性来取消
+
+$_GET: 用于获取以get方式提交的内容，更标准的说法：接收 URL 地址问号参数中的数据
+$_POST: 用于获取以 POST 方式提交的内容，更标准的说法：接收请求体中的数据
+$_REQUEST: 用于获取GET或 POST方式提交的内容
+
+1.一般的为了便于维护，我们把表单提交给页面本身。
+2.由于文件重命名会导致代码修改，鲁棒性不强。所以在action= "<?php echo $_SERVER['PHP_SELF']; ?>"这句话指向的是自身文件
+3.接收数据的php代码写在html之前，又因为对于表单的处理逻辑不是每一次都需要执行，所以一般我们会判断请求的方式，从而决定是否执行对数据的处理：
+if（$_SERVER['REQUEST_METHOD']==='POST'）{
+	数据处理函数
+}
+
+每个单选框要有自己的value值
+复选框：如果没设置checkbox 选中的value值 默认是on，如果设置了就是value值，如果需要同时提交多个选中项，可以在name属性后面跟上[ ];(数组)
+
+如果表单中有文件域（文件上传），必须将表单的form标签中的 method 设置为 post，enctype 设置为 multipart/form-data.----------------enctype 默认 urlencoded 格式 key1 = value1
+可以通过$_FILES获取文件信息

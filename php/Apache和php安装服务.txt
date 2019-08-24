@@ -1,0 +1,22 @@
+Apache：
+1.下载Apache 解压到一个纯英文的路径
+2.管理员:命令行 输入：httpd -k -install -n "Apache"
+3.配置Apache的安装路径 Define SRVROOT "路径"
+4.网站根目录
+DocumentRoot "路径"
+<Directory "路径">
+
+5添加默认文档 
+<IfModule dir_module>
+    DirectoryIndex index.html index.php
+</IfModule>
+
+PHP：
+1.下载文件
+2.解压到一个纯英文的路径
+3.在Apache的httpd.conf 文件中添加模块
+LoadModule php_module 路径/php7apache2_4.dll
+4.添加php type
+在<IFModule mime_module>标签里添加
+AddType application/x-httpd-php .php
+

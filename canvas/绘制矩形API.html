@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>矩形</title>
+	<style>
+	canvas {
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+	<canvas width="400" height="200"></canvas>
+	<script>
+		window.onload = function () {
+			// 获取该对象
+			var myCanvas = document.querySelector('canvas')
+			// 拿到上下文（工具箱）
+			var ctx = myCanvas.getContext('2d')
+			// 从100,100的位置画长为200，高为100的矩形，没有独立路径
+			//ctx.rect(100,100,200,100)
+			// 实例化
+			//ctx.stroke()
+
+			// 从100,100的位置画长为200，高为100的矩形，有独立路径
+			//ctx.strokeRect(100,100,200,100)
+			
+			// 从100,100的位置填充长为200，高为100的矩形，有独立路径
+			//ctx.fillRect(100,100,200,100)
+			//
+			// 清除矩形里的内容
+			//ctx.clearRect(100,100,200,100)
+		}
+	</script>
+</body>
+</html>

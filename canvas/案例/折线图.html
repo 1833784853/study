@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>折线图</title>
+	<style>
+	canvas {
+		border: 1px solid #ccc;
+	}
+</style>
+</head>
+<body>
+	<canvas width="600" height="400"></canvas>
+	<script>
+		// var cvs = document.querySelector('canvas')
+		// var ctx = cvs.getContext('2d')
+		// var gridSize = 40
+		// var lineColor = '#ccc'
+		// var canvasHeight = ctx.canvas.height
+		// var canvasWidth = ctx.canvas.width
+		// var xLineTotal = Math.floor(canvasHeight / gridSize)
+		// var yLineTotal = Math.floor(canvasWidth / gridSize)
+		// for( i = 0; i < xLineTotal; i++) {
+		// 	ctx.beginPath()
+		// 	ctx.moveTo(0,i*gridSize+0.5)
+		// 	ctx.lineTo(canvasWidth,i*gridSize+0.5)
+		// 	ctx.strokeStyle = lineColor
+		// 	ctx.stroke()
+		// }
+		// for( i = 0; i < yLineTotal; i++) {
+		// 	ctx.beginPath()
+		// 	ctx.moveTo(i*gridSize+0.5,0)
+		// 	ctx.lineTo(i*gridSize+0.5,canvasHeight)
+		// 	ctx.strokeStyle = lineColor
+		// 	ctx.stroke()
+		// }
+		var data = [
+			{
+				x:100,
+				y:120
+			},
+			{
+				x:150,
+				y:180
+			},
+			{
+				x:200,
+				y:200
+			},
+			{
+				x:250,
+				y:330
+			},
+			{
+				x:300,
+				y:180
+			}
+		]
+		// 面向对象
+		var LineChart = function (json) {
+			// 获取传入的形参
+			for( var value in json ) {
+				// 是否传入canvas对象
+				if (value === 'ctx') {
+					this.ctx = json[value]
+				} else {
+					this.ctx = document.querySelector('canvas').getContext('2d')
+				}
+				// 是否传入网格大小
+				if (value === 'gridSize') {
+					this.gridSize = json[value]
+				}
+				if (this.gridSize == undefined ) {
+					this.gridSize = 40
+				}
+				// 是否传入坐标轴与边框的距离
+				if (value === 'space' ) {
+					this.space = json[value]
+				}
+				if (this.space == undefined) {
+					this.space = 10
+				}
+				// 是否传入箭头大小
+				if (value === 'arrowSize' ) {
+					this.arrowSize = json[value]
+				}
+				if (this.arrowSize == undefined) {
+					this.arrowSize = 7
+				}
+				// 是否传入点的大小
+				if (value === 'dottedSize' ) {
+					this.dottedSize = json[value]
+				}
+				if (this.dottedSize == undefined) {
+					this.dottedSize = 6
+				}
+				// 是否传入线的颜色
+				if (value === 'lineColor' ) {
+					this.lineColor = json[value]
+				}
+				if (this.lineColor == undefined) {
+					this.lineColor = '#ccc'
+				}
+			}
+			// 什么都不传则执行
+			if(arguments.length < 1) {
+				//canvas对象
+				this.ctx = document.querySelector('canvas').getContext('2d')
+				//网格大小
+				this.gridSize = 40
+				//坐标轴与边框的距离 px
+				this.space = 10
+				//箭头大小 px
+				this.arrowSize = 7
+				//点的大小 px
+				this.dottedSize = 6
+				//线的颜色
+				this.lineColor = '#ccc'
+			}
+			this.canvasWidth = this.ctx.canvas.width
+			this.canvasHeight = this.ctx.canvas.height
+		}
+		//绘制网格
+		LineChart.prototype.drawGrid = function () {
+			var xLineTotal = Math.floor(this.canvasHeight / this.gridSize)
+			var yLineTotal = Math.floor(this.canvasWidth / this.gridSize)
+			for( i = 1; i <= xLineTotal; i++) {
+				this.ctx.beginPath()
+				this.ctx.moveTo(0,i*this.gridSize+0.5)
+				this.ctx.lineTo(this.canvasWidth,i*this.gridSize+0.5)
+				this.ctx.strokeStyle = this.lineColor
+				this.ctx.stroke()
+			}
+			for (var i = 1; i <= yLineTotal; i++) {
+				this.ctx.beginPath()
+				this.ctx.moveTo(i*this.gridSize+0.5,0)
+				this.ctx.lineTo(i*this.gridSize+0.5,this.canvasHeight)
+				this.ctx.strokeStyle = this.lineColor
+				this.ctx.stroke()
+			}
+		}
+		//绘制坐标系
+		LineChart.prototype.drawAxis = function () {
+			// y轴
+			this.ctx.beginPath()
+			this.ctx.moveTo(this.space+0.5,this.canvasHeight-this.space)
+			this.ctx.lineTo(this.space+0.5,this.space)
+			this.ctx.strokeStyle = '#000'
+			this.ctx.stroke()
+			// y轴箭头
+			this.ctx.beginPath()
+			this.ctx.moveTo(this.space+0.5,this.space)
+			this.ctx.lineTo(this.space+this.arrowSize /2 +0.5,this.space+this.arrowSize +0.5)
+			this.ctx.lineTo(this.space-this.arrowSize /2 +0.5,this.space+this.arrowSize+0.5)
+			this.ctx.closePath()
+			this.ctx.fill()
+			this.ctx.stroke()
+			// x轴
+			this.ctx.beginPath()
+			this.ctx.moveTo(this.space,this.canvasHeight-this.space+0.5)
+			this.ctx.lineTo(this.canvasWidth - this.space,this.canvasHeight-this.space +0.5)
+			this.ctx.strokeStyle = '#000'
+			this.ctx.stroke()
+			// x轴箭头
+			this.ctx.beginPath()
+			this.ctx.moveTo(this.canvasWidth - this.space,this.canvasHeight-this.space +0.5)
+			this.ctx.lineTo(this.canvasWidth - this.space - this.arrowSize +0.5,this.canvasHeight - this.space + this.arrowSize /2 +0.5)
+			this.ctx.lineTo(this.canvasWidth - this.space - this.arrowSize +0.5,this.canvasHeight - this.space - this.arrowSize /2 +0.5)
+			this.ctx.closePath()
+			this.ctx.fill()
+			this.ctx.stroke()
+		}
+		//绘制点&连线
+		LineChart.prototype.drawDotted = function (data) {
+			var that = this
+			var x0 = that.space
+			var y0 = that.canvasHeight - that.space
+			var lastX = 0
+			var lastY = 0
+			data.forEach(function(item,i) {
+				var canvasX = x0 + item.x +0.5
+				var canvasY = y0 - item.y +0.5
+				that.ctx.beginPath()
+				that.ctx.moveTo(canvasX - that.dottedSize / 2 , canvasY - that.dottedSize / 2)
+				that.ctx.lineTo(canvasX + that.dottedSize / 2, canvasY - that.dottedSize / 2)
+				that.ctx.lineTo(canvasX + that.dottedSize / 2, canvasY + that.dottedSize / 2)
+				that.ctx.lineTo(canvasX - that.dottedSize / 2, canvasY + that.dottedSize / 2)
+				that.ctx.closePath()
+				that.ctx.fill()
+				that.ctx.stroke()
+
+				if ( i == 0 ) {
+					that.ctx.beginPath()
+					that.ctx.moveTo(x0,y0)
+					that.ctx.lineTo(canvasX,canvasY)
+				} else {
+					that.ctx.moveTo(lastX,lastY)
+					that.ctx.lineTo(canvasX,canvasY)
+				}
+				that.ctx.stroke()
+				lastX = canvasX
+				lastY = canvasY
+			})
+		}
+		//初始化
+		LineChart.prototype.init = function (data) {
+			this.drawGrid()
+			this.drawAxis()
+			this.drawDotted(data)
+		}
+		var lineChart = new LineChart ({
+			gridSize : 40,
+			space : 50,
+			dottedSize : 10,
+			lineColor : 'green',
+			arrowSize : 10
+		})
+		lineChart.init(data)
+	</script>
+</body>
+</html>

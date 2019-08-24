@@ -1,0 +1,71 @@
+1.下载mysql
+2.用管理员运行命令行
+到mysql的bin目录下初始化
+输入mysqld --initialize --user=mysql --console
+记录localhost：后面的密码
+3.安装服务
+mysqld --install MySQL
+
+用普通命令行到mysql>bin 
+输入mysql -u root -p 敲回车
+输入localhost的密码
+
+进入mysql后重置密码
+输入set password for root@localhost = password('密码');
+
+常用指令
+创建数据库： create database 数据库名字; =====例：create database demo;
+查看数据库：show databases;
+进入数据库：use 数据库名字;
+
+在mysql文件夹下新建 my.ini文件 输入以下内容改变默认字符集
+[mysqld]
+character-set-server=utf8
+
+==========================================================
+查询语句：
+select 查询的键 from 在哪个数据库查询
+
+新增语句：
+insert into 库的名字 (键的名称) values (值);===例：insert into demo (`title`,`name`) values ('标题', '小王');
+
+删除语句：
+delete from 库的名字 where 键 = 值;
+delete from 库的名字 where 键 = 值 and 键 = 值;
+delete from 库的名字 where 键 in (值,值,值,值...);
+
+修改语句：
+update 库的名字 set 键 = 值 where 哪行;=====例：update demo set title = 'jd' where id = 1;
+
+常见查询函数：
+count('键');
+最大值/最小值：max('键')/min('键');
+平均值：avg('键')
+select 函数 from 库；
+/***********************分页查询：
+limit skip(从哪里开始查询), length(查询多少条);
+skip = (page - 1)*length;
+
+//建立连接
+$connect = mysqli_connect('127.0.0.1','root','love856507710','demo');
+
+//判断是否连接成功 
+if (!$connect) {
+	exit("<h1>数据库连接失败</h1>");
+}
+
+//基于刚刚创建的连接对象执行一次查询操作
+//得到的是一个查询对象
+$query = mysqli_query($connect,'select * from demo;');
+
+//判断是否查询成功
+if (!$query) {
+	exit("<h1>查询失败</h1>");
+}
+$data = array();
+//一行一行的取数据
+while ($rows = mysqli_fetch_assoc($query)) {
+	array_push($data,$rows); 
+}
+
+var_dump($data);

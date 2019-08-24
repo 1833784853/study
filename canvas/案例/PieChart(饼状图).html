@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>text</title>
+	<style>
+	canvas {
+		border: 1px solid red;
+		display: block;
+		margin: 100px auto;
+	}
+</style>
+</head>
+<body>
+	<canvas width="600" height="400"></canvas>
+	<script>
+		var data = [
+			{
+				title : '15-20岁',
+				num : 6
+			},
+			{
+				title : '20-25岁',
+				num : 30
+			},
+			{
+				title : '25-30岁',
+				num : 15
+			},
+			{
+				title : '30岁以上',
+				num : 10
+			}
+		]
+		function PigChart () {
+			this.ctx = document.querySelector('canvas').getContext('2d')
+			// 半径
+			this.radius = this.ctx.canvas.width / 4
+			// 多出圆形的线
+			this.outLine = this.radius / 8
+			// 左上角矩形和边框直接的上和左间距
+			this.space = 20
+			// 左上角矩形的宽
+			this.rectWidth = 40
+			// 左上角矩形的长
+			this.rectHeight = 20
+			// 左上角矩形和矩形之间的间距
+			this.rectSpace = 10
+			// 文字的大小和字体
+			this.fontStyle = '14px Microsoft YaHei'
+			this.canvasWidth = this.ctx.canvas.width
+			this.canvasHeight = this.ctx.canvas.height
+		}
+		// 配置
+		PigChart.prototype.dispose = function (json) {
+			//判断是否传入了对象，如果传入则遍历,否则就自行给值
+			if (arguments.length>=1) {
+				for(var value in json) {
+					// 判断是否传入了canvas对象，如果传入则用 否则自行获取
+					if ( value == 'context' ) {
+						this.ctx = json[value]
+					} else if ( this.ctx === undefined ) {
+						this.ctx = document.querySelector('canvas').getContext('2d')
+					}
+					// 判断是否传入半径
+					if ( value == 'radius' ) {
+						this.radius = json[value]
+					} else if ( this.radius === undefined ) {
+						this.radius = this.ctx.canvas.width / 4
+					}
+					// 判断是否传入多出圆形的线的值
+					if ( value == 'outLine' ) {
+						this.outLine = json[value]
+					} else if ( this.outLine === undefined ) {
+						this.outLine = this.radius / 8
+					}
+					// 判断是否传入左上角矩形和矩形之间的间距
+					if ( value == 'fontStyle' ) {
+						this.fontStyle = json[value]
+					} else if ( this.fontStyle === undefined ) {
+						this.fontStyle = '14px Microsoft YaHei'
+					}
+					// 判断是否传入左上角矩形和边框直接的上和左间距
+					if ( value == 'space' ) {
+						this.space = json[value]
+					} else if ( this.space === undefined ) {
+						this.space = 20
+					}
+					// 判断是否传入左上角矩形的宽
+					if ( value == 'rectWidth' ) {
+						this.rectWidth = json[value]
+					} else if ( this.rectWidth === undefined ) {
+						this.rectWidth = 40
+					}
+					// 判断是否传入左上角矩形的长
+					if ( value == 'rectHeight' ) {
+						this.rectHeight = json[value]
+					} else if ( this.rectHeight === undefined ) {
+						this.rectHeight = 20
+					}
+					// 判断是否传入左上角矩形和矩形之间的间距
+					if ( value == 'rectSpace' ) {
+						this.rectSpace = json[value]
+					} else if ( this.rectSpace === undefined ) {
+						this.rectSpace = 10
+					}
+
+				}
+			}
+		}
+		// 绘制饼图
+		PigChart.prototype.drawPig = function (data) {
+			// 接收数据中的弧度
+			var angleList = this.transformAngle(data)
+			// 中心点
+			var x0 = this.canvasWidth / 2 + this.canvasWidth / 8
+			var y0 = this.canvasHeight / 2
+			// 记录上一个开始的地点
+			var start = 0
+			// 绘制饼图
+			var that = this
+			angleList.forEach(function (item,i) {
+				var end = start + item.angle
+				that.ctx.beginPath()
+				that.ctx.moveTo(x0,y0)
+				that.ctx.arc(x0,y0,that.radius,start,end)
+				that.ctx.closePath()
+				var color = that.ctx.fillStyle = that.getRandomColor()
+				that.ctx.fill()
+				// 绘制注释
+				that.drawText(start,item.angle,color,x0,y0,item.title)
+				// 绘制左上角的注释
+				that.drawDesc(i,item.title)
+				start = end
+			})
+		}
+		// 绘制注释
+		PigChart.prototype.drawText = function (start,angle,color,x,y,title) {
+			// 根据 斜边和角度算出另外两条边的长，
+			// 斜边
+			var edgeZ = this.radius + this.outLine
+			// 角度
+			var angle = start + angle / 2
+			// 邻边 x表示圆心的x坐标 y表示圆心的y坐标
+			var outX = x+Math.cos(angle) * edgeZ
+			// 对边
+			var outY = y+Math.sin(angle) * edgeZ
+			this.ctx.beginPath()
+			this.ctx.moveTo(x,y)
+			this.ctx.lineTo(outX,outY)
+			this.ctx.strokeStyle = color
+			// 获取文字宽度
+			this.ctx.font = this.fontStyle
+			var textWidth = this.ctx.measureText(title).width
+			// 绘制文字，判断线和文字在点的右边还是左边
+			// 如果 outX > x 则在右边 否则在左边
+			this.ctx.textBaseline = 'bottom'
+			if ( outX > x ) {
+				this.ctx.fillText(title,outX,outY)
+				this.ctx.lineTo(outX + textWidth,outY)
+			} else {
+				// 左边的文字的基准点X方向要减去字的宽度
+				this.ctx.fillText(title,outX - textWidth,outY)
+				this.ctx.lineTo(outX - textWidth,outY)
+			}
+			this.ctx.stroke()
+		}
+		// 绘制左上角的注释
+		PigChart.prototype.drawDesc = function (index,title) {
+			// 绘制矩形
+			this.ctx.fillRect(this.space,this.space+index*(this.rectHeight+this.rectSpace),this.rectWidth,this.rectHeight)
+			// 绘制文字
+			this.ctx.textBaseline = 'top'
+			this.ctx.fillText(title,this.space+this.rectWidth+5,this.space+index*(this.rectHeight+this.rectSpace))
+		}
+		PigChart.prototype.transformAngle = function (data) {
+			// 返回一个带有弧度的数据
+			var total = 0
+			//计算出中人数
+			data.forEach(function(item,i) {
+				total += item.num
+			})
+			//计算出弧度，并添加到data中
+			data.forEach(function(item,i) {
+				var angle = item.num / total * Math.PI * 2
+				item.angle = angle
+			})
+			return data
+		}
+		// 返回一个rgb随机颜色
+		PigChart.prototype.getRandomColor = function () {
+			var r = Math.floor( Math.random() * 256 )
+			var g = Math.floor( Math.random() * 256 )
+			var b = Math.floor( Math.random() * 256 )
+			return 'rgb('+r+','+g+','+b+')'
+		}
+		PigChart.prototype.init = function (data) {
+			//绘制拼图
+			this.drawPig(data)
+		}
+		window.pigChart = new PigChart()
+		//pigChart.dispose()
+		console.log(pigChart)
+		pigChart.init(data)
+	</script>
+</body>
+</html>

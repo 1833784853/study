@@ -1,0 +1,6 @@
+在meta标签中设置 视口（viewport）大小以及一些设置 ：
+content ="":进行viewport的设置
+width：设置viewport的宽度 device-width：获取当前设备的宽度
+initial-scale=1: 设置初始缩放比例 当设置为1时和 device-width一样的效果
+maximum-scale：设置最大的缩放比例
+minimum-scale：设置默认状态下最小的缩放比例

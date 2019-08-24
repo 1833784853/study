@@ -1,0 +1,24 @@
+//1.创建一个 XMLHttpRequest 类型的对象 -- 相当于打开了浏览器
+var xhr = new XMLHttpRequest()
+// 2.打开与一个网址之间的连接 -- 相当于在地址栏输入访问地址
+xhr.open('GET','./time.php')
+//3.通过连接发送一次请求 -- 相当于回车或者点击访问发送请求
+xhr.send(null)
+//4.指定 xhr 状态变化事件处理函数 --相当于处理网页呈现后的操作
+xhr.onreadystatechange = function () {
+	//通过 xhr 的 readystate 判断此次请求的响应是否接收完成
+	if（this.readyState !== 4）return
+	// 通过 xhr 的responseText 获取到响应的响应体
+	console.log(this)
+}
+
+jquery 中的ajax
+$.ajax({
+     url(请求地址):'地址',
+     type: 'method(请求方法)',
+     data: '{ id: 1 , name: '张三' }', // ?后面的参数
+     success: function(res) {     //处理函数
+         //res =>拿到的只是响应体
+	console.log(res);
+     }
+})

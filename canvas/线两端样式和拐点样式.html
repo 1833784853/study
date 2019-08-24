@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1</title>
+	<style>
+	canvas {
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+	<canvas width="600" height="400"></canvas>
+	<script>
+		window.onload = function () {
+			// 获取该对象
+			var myCanvas = document.querySelector('canvas')
+			// 拿到上下文（工具箱）
+			var ctx = myCanvas.getContext('2d')
+			ctx.beginPath()
+			// 画笔移动到x：50 y：100
+			ctx.moveTo(50,100)
+			// 行动的轨迹终点100，起点150
+			ctx.lineTo(175.5,50.5)
+			ctx.lineTo(300.5,100.5)
+			// strokeStyle = '' 设置线的颜色
+			ctx.strokeStyle = 'skyblue'
+			// lineWidth = 10 设置线的宽
+			ctx.lineWidth = 10
+			// lineCap 线末端的样式 默认'butt'
+			ctx.lineCap = 'butt'
+			// lineJoin 拐点样式 默认'miter'
+			ctx.lineJoin = 'miter'
+			// 实例化
+			ctx.stroke()
+
+			ctx.beginPath()
+			// 画笔移动到x：50 y：100
+			ctx.moveTo(50,200.5)
+			// 行动的轨迹终点100，起点150
+			ctx.lineTo(175.5,150.5)
+			ctx.lineTo(300.5,200.5)
+			// strokeStyle = '' 设置线的颜色
+			ctx.strokeStyle = 'green'
+			// lineWidth = 10 设置线的宽
+			ctx.lineWidth = 20
+			// lineCap 线末端的样式 默认'butt'
+			ctx.lineCap = 'square'
+			// lineJoin 拐点样式 默认'miter'
+			ctx.lineJoin = 'bevel'
+			// 实例化
+			ctx.stroke()
+
+			ctx.beginPath()
+			// 画笔移动到x：50 y：100
+			ctx.moveTo(50,300)
+			// 行动的轨迹终点100，起点150
+			ctx.lineTo(175.5,250.5)
+			ctx.lineTo(300.5,300.5)
+			// strokeStyle = '' 设置线的颜色
+			ctx.strokeStyle = 'red'
+			// lineWidth = 10 设置线的宽
+			ctx.lineWidth = 30
+			// lineCap 线末端的样式 默认'butt'
+			ctx.lineCap = 'round'
+			// lineJoin 拐点样式 默认'miter'
+			ctx.lineJoin = 'round'
+			// 实例化
+			ctx.stroke()
+		}
+	</script>
+</body>
+</html>

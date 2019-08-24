@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>title</title>
+	<style>
+	canvas {
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+	<canvas width="400" height="200"></canvas>
+	<script>
+		window.onload = function () {
+			// 获取该对象
+			var myCanvas = document.querySelector('canvas')
+			// 拿到上下文（工具箱）
+			var ctx = myCanvas.getContext('2d')
+			// 创建一个image对象在内存中，而不是直接用dom引进
+			var img = new Image()
+			img.src = '../../images/1.jpg'
+			img.onload = function () {
+				// 在canvas中绘制图片
+				// 3参数
+				// 图片对象，x，y
+				// ctx.drawImage(img,0,0)
+				
+				// 5参数
+				// 图片对象，x，y,图片的宽度，图片的高度（缩放）
+				// ctx.drawImage(img,0,0,ctx.canvas.width,ctx.canvas.height)
+				
+				// 9参数
+				// 图片对象，在图片上的定位坐标（第一对坐标），在图片上截取多大（第二队坐标），绘制在画布上的坐标（x，y）,图片的宽度，图片的高度（缩放）
+				// ctx.drawImage(img,0,0,600,600,0,0,100,100)
+				
+			}
+		}
+	</script>
+</body>
+</html>

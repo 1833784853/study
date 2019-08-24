@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>矩形</title>
+	<style>
+	canvas {
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+	<canvas width="400" height="200"></canvas>
+	<script>
+		window.onload = function () {
+			// 获取该对象
+			var myCanvas = document.querySelector('canvas')
+			// 拿到上下文（工具箱）
+			var ctx = myCanvas.getContext('2d')
+			// 创建一个渐变方案
+			var linearGradient = ctx.createLinearGradient(50,50,350,50) // 两点确定方向  
+			linearGradient.addColorStop(0,'red') //0代表 起始0% 
+			linearGradient.addColorStop(1,'blue') 
+			ctx.fillStyle = linearGradient
+			ctx.fillRect(50,50,300,100)
+		}
+	</script>
+</body>
+</html>

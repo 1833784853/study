@@ -1,0 +1,75 @@
+API :(Application Programming interface)应用程序编程接口，接口都是提供某种特定能力的事物，有输入和输出。
+任何编程语言本身并没有太多的能力，具体的能力大多数来源API
+在php文件中如果只有php代码则不用加 ?>
+
+echo : 打印多个字符串和数据
+
+var_dump() :是一个函数中间，打印得更详细
+
+指令式语句
+if () :
+内容
+else :
+内容
+endif;
+
+在函数中需要访问全局变量 则要用global声明
+常量：一旦定义了就不能被修改，通常用define（'常量名字'，'常量的值'）定义，一般程序的配置信息中用；
+
+字符串常用API：
+explode("参数1"，参数2); 参数1：根据什么来切割字符串，参数2：要切割的字符串；
+strlen(string)；获取字符串长度；
+trim(参数1，参数2); 把参数1两边的字符减去，参数2：修剪的字符，如果什么都不填默认减去两边各1个字符
+ltrim(参数1，参数2)修剪左边的字符；
+rtrim(参数1，参数2)修剪右边的字符；
+strpos（参数1，参数2）: 参数1：要搜索的字符串，参数2：搜索内容，如果搜索不到返回false，否则返回索引值。
+strtolower（参数）：把参数字符串转小写
+strtoupper(参数)：把参数字符串转大写
+substr（参数1，参数2（数字））：参数1要截取的字符串，从什么位置开始截取，返回截取后的字符串
+str_replace（参数1，参数2，参数3）参数1：你要替换的字符串。参数2：替换成什么字符串。参数3：在哪个字符串中换
+str_repeat(参数1，参数2)：参数1：重复字符串，重复的次数；
+
+数组常用API：
+array_keys(数组) :获取数组中的键；
+array_values(数组) :获取数组中的值；
+array_key_exists("值"，数组) ：判断数组中有无这个值，返回的是一个布尔类型
+/*只有当 php.ini 中 display_errors = on 时，界面才显示notice 错误，开发阶段为 on 生产阶段为off
+isset(参数)：判断变量或者是数组中的键是否存在，返回的是一个布尔类型
+array_unique(数组)；去除数组中的重复元素
+arrary_push(array，var)；array：添加到的数组。var :把什么添加到数组的最后一项；
+arrary_pop(array，var)；array：删除的数组。var :把什么删除到数组中最后一项；
+count(array);获取数组的长度
+in_array(要找的值，array);获取这个值在数组中是否存在，返回的是布尔类型；
+array_search(要搜索的值，array); 返回的是该值出现在数组中的下标；
+
+date（时间函数）
+time(); 获取时间戳单位是秒
+date_default_timezone_set("RPC"); 设置时区RPC表示中国
+date("参数1","参数2")；格式化时间戳，参数1是时间格式，参数2是时间戳 常用格式'Y-m-d H:i:s' 可以参照date表格
+strtotime（'字符串时间'）；得到的是时间戳；
+
+文件处理
+basename（'路径'）返回路径中的文件名部分；
+copy（参数1，参数2）；拷贝参数1是拷贝文件的路径。参数2拷贝的文件
+dirname（'路径'）返回路径部分除了文件名
+disk_free_space('磁盘')返回磁盘的可用空间
+disk_total_space('磁盘')返回磁盘的总空间
+fclose()关闭打开的文件
+file（'路径')；把数据存储到数组中并以\n切割
+file_exists(路径)；检查文件是否存在
+载入文件内容flie_get_contents("文件路径"); 例：$data = flie_gei_contents("name.txt"); (得到一个字符串)
+flie_put_contents('文件路径'，'data',参数（flags）); 把数据写入文件中,如果flags为FILE_APPEND时为在原有的数据上追加。
+filesize（'文件路径'）; 返回文件大小
+fopen（'文件路径'）;打开一个文件或url
+is_dir('文件名')；判断给定文件名是否是一个目录
+is_file('文件名')；判断给定文件名是否为一个正常的文件
+mkdir('路径名')；创建一个目录
+move_uploaded_file('上传的文件的文件名','移动文件到这个位置');  将上传的文件移动到新位置
+pathinfo('要解析的路径');   返回文件路径的信息
+rename('oldname','newname');   重命名一个文件或目录
+rmdir('目录名字')；删除一个空目录；
+unlink('filename'); 删除文件；
+
+载入文件：
+require_once '文件名'; 如果之前载入过，不再执行，由于类似于 定义常量 定义函数 这种操作不能执行多次，所以该方法更合适。
+

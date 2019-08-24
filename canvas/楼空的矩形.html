@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4</title>
+	<style>
+	canvas {
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+	<canvas width="600" height="600"></canvas>
+	<script>
+		window.onload = function () {
+			// 获取该对象
+			var myCanvas = document.querySelector('canvas')
+			// 拿到上下文（工具箱）
+			var ctx = myCanvas.getContext('2d')
+			ctx.beginPath()
+			// 画笔移动到x：50 y：100
+			ctx.moveTo(100,100)
+			ctx.lineTo(400,100)
+			ctx.lineTo(400,400)
+			ctx.lineTo(100,400)
+			//由于起始点和lineTo无法完全闭合缺角
+			//所以使用closePath() 来让canvas自动闭合
+			ctx.closePath()
+			// 实例化
+			ctx.stroke()
+			//填充
+
+			ctx.moveTo(175,175)
+			ctx.lineTo(175,325)
+			ctx.lineTo(335,325)
+			ctx.lineTo(335,175)
+			ctx.closePath()
+			ctx.fillStyle = 'skyblue'
+			ctx.fill()
+			// 实例化
+			ctx.stroke()
+		}
+	</script>
+</body>
+</html>

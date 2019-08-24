@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>text</title>
+	<style>
+	canvas {
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+	<canvas width="600" height="400"></canvas>
+	<script>
+		var canvas = document.querySelector('canvas')
+		var ctx = canvas.getContext('2d')
+		// 获取宽和高
+		var w = ctx.canvas.width
+		var h = ctx.canvas.height
+		var str = '贫穷'
+		// 设置字体大小和字体
+		ctx.font = '40px Microsoft YaHei'
+		// 描边文字，
+		//ctx.strokeText(str,w/2,h/2)
+		// 左右居中对齐，以基准起始坐标为准 默认左对齐
+		ctx.textAlign = 'center'
+		// 上下居中对齐，以基准起始坐标为准 默认bottom对齐 基准点相对于文字的下面
+		ctx.textBaseline = 'middle'
+		// 填充文字
+		ctx.fillText(str,w/2,h/2)
+		ctx.beginPath()
+		// 获取文字的宽度
+		var textWidth = ctx.measureText(str).width
+		// 在文字下方画出一条直线
+		ctx.moveTo(w/2-textWidth/2,h/2+25)
+		ctx.lineTo(w/2+textWidth/2,h/2+25)
+		ctx.stroke()
+	</script>
+</body>
+</html>

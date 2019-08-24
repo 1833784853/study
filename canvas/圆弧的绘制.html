@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>矩形</title>
+	<style>
+	canvas {
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+	<canvas width="600" height="400"></canvas>
+	<script>
+		window.onload = function () {
+			// 获取该对象
+			var myCanvas = document.querySelector('canvas')
+			// 拿到上下文（工具箱）
+			var ctx = myCanvas.getContext('2d')
+			var w = ctx.canvas.width
+			var h = ctx.canvas.height
+			// 第一个参数和第二个参数表示在哪里绘制(圆心)，第三个参数为半径（px）,第四个参数为起点，第五个为终点，起点和终点都是用弧度表示，第六个参数是方向默认是顺时针（false） 逆时针（true）
+			// 以画布中心 为圆心绘制一个半径为150的圆弧
+			ctx.moveTo(w/2,h/2)
+			ctx.arc(w/2,h/2,150,0,-Math.PI/2,true)
+			ctx.closePath()
+			ctx.stroke()
+			
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>N-arc</title>
+	<style>
+	canvas {
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+	<canvas width="600" height="400"></canvas>
+	<script>
+		var canvas = document.querySelector('canvas')
+		var ctx = canvas.getContext('2d')
+		// 获取宽和高
+		var w = ctx.canvas.width
+		var h = ctx.canvas.height
+		var num = 2
+		angle = Math.PI*2/num
+		var endAngle = 0
+		var startAngle = 0
+		for(var i = 0; i <=6; i++) {
+			startAngle = i * angle
+			endAngle = (i+1) * angle
+			ctx.beginPath()
+			ctx.moveTo(w/2,h/2)
+			ctx.arc(w/2,h/2,150,startAngle,endAngle)
+			ctx.closePath()
+		}
+		ctx.stroke()
+	</script>
+</body>
+</html>
