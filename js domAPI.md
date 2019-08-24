@@ -1,22 +1,23 @@
-str.indexOf("²ÎÊı")£ºÕÒµ½×Ö·û´®ÖĞºÍ²ÎÊıÒ»ÑùµÄ×Ö·û´®£¬·µ»ØµÄÊÇ³öÏÖµÄË÷Òı£¬ÕÒ²»µ½·µ»Ø-1¡£
+str.indexOf("å‚æ•°")ï¼šæ‰¾åˆ°å­—ç¬¦ä¸²ä¸­å’Œå‚æ•°ä¸€æ ·çš„å­—ç¬¦ä¸²ï¼Œè¿”å›çš„æ˜¯å‡ºç°çš„ç´¢å¼•ï¼Œæ‰¾ä¸åˆ°è¿”å›-1ã€‚
 
-str.startsWith("²ÎÊı")£ºÅĞ¶Ï×Ö·û´®ÊÇ·ñÒÔ²ÎÊı¿ªÍ·£¬·µ»ØµÄÊÇ²¼¶ûÀàĞÍ¡£
-str.endsWith("²ÎÊı")£ºÅĞ¶Ï×Ö·û´®ÊÇ·ñÒÔ²ÎÊı½áÎ²£¬·µ»ØµÄÊÇ²¼¶ûÀàĞÍ¡£
+str.startsWith("å‚æ•°")ï¼šåˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦ä»¥å‚æ•°å¼€å¤´ï¼Œè¿”å›çš„æ˜¯å¸ƒå°”ç±»å‹ã€‚
+str.endsWith("å‚æ•°")ï¼šåˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦ä»¥å‚æ•°ç»“å°¾ï¼Œè¿”å›çš„æ˜¯å¸ƒå°”ç±»å‹ã€‚
 
-H5ÖĞĞÂÔö²Ù×÷DOM·½·¨
+H5ä¸­æ–°å¢æ“ä½œDOMæ–¹æ³•
 
-Ñ¡ÔñÆ÷£º
-document.querySelector('²ÎÊı1') £ºÈç¹û»ñÈ¡µÄÊÇclassÔò´ø. idÔò´ø# ±êÇ©Ê²Ã´¶¼²»´ø
-document.querySelectorAll('²ÎÊı1')£º»ñÈ¡ÊÇÒ»¸öÊı×é
+é€‰æ‹©å™¨ï¼š
+document.querySelector('å‚æ•°1') ï¼šå¦‚æœè·å–çš„æ˜¯classåˆ™å¸¦. idåˆ™å¸¦# æ ‡ç­¾ä»€ä¹ˆéƒ½ä¸å¸¦
+document.querySelectorAll('å‚æ•°1')ï¼šè·å–æ˜¯ä¸€ä¸ªæ•°ç»„
 
-²Ù×÷classÊôĞÔ£º
+æ“ä½œclasså±æ€§ï¼š
 
-.classList £º»ñÈ¡µÄÊÇÔªËØµÄÈ«²¿ÑùÊ½£¨Êı×é£©
-.add("classÃû³Æ") £ºÈç¹ûÒªÌí¼ÓÁ½¸öÑùÊ½ÒªĞ´Á½±é£¬ÁĞÈçdocument.querySelector('li').classList.add('rad')
+.classList ï¼šè·å–çš„æ˜¯å…ƒç´ çš„å…¨éƒ¨æ ·å¼ï¼ˆæ•°ç»„ï¼‰
+.add("classåç§°") ï¼šå¦‚æœè¦æ·»åŠ ä¸¤ä¸ªæ ·å¼è¦å†™ä¸¤éï¼Œåˆ—å¦‚document.querySelector('li').classList.add('rad')
 document.querySelector('li').classList.add('blue')
-.remove('classÃû³Æ')£ºÒÆ³ıclassÑùÊ½£¬²»ÊÇÒÆ³ıclassÊôĞÔ£¬ÀıÈçdocument.querySelector('li').classList.remove('rad')
-.toggle('classÃû³Æ'):Èç¹ûclassÑùÊ½Ã»ÓĞÔòÌí¼Ó£¬ÓĞÔòÉ¾³ı£¬ÀıÈçdocument.querySelector('li').classList.toggle('rad')
-.contains('classÃû³Æ'): ÅĞ¶ÏÔªËØÊÇ·ñ°üº¬Ö¸¶¨Ãû³ÆµÄÑùÊ½£¬·µ»Øtrue»òfalse ÀıÈçdocument.querySelector('li').classList.contains('rad')
+.remove('classåç§°')ï¼šç§»é™¤classæ ·å¼ï¼Œä¸æ˜¯ç§»é™¤classå±æ€§ï¼Œä¾‹å¦‚document.querySelector('li').classList.remove('rad')
+.toggle('classåç§°'):å¦‚æœclassæ ·å¼æ²¡æœ‰åˆ™æ·»åŠ ï¼Œæœ‰åˆ™åˆ é™¤ï¼Œä¾‹å¦‚document.querySelector('li').classList.toggle('rad')
+.contains('classåç§°'): åˆ¤æ–­å…ƒç´ æ˜¯å¦åŒ…å«æŒ‡å®šåç§°çš„æ ·å¼ï¼Œè¿”å›trueæˆ–false ä¾‹å¦‚document.querySelector('li').classList.contains('rad')
 
-local´¢´æ
+localå‚¨å­˜
 localStorage.setItem()
+222222222222222222222222222
